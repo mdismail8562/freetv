@@ -4,23 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Till Infinity Play - Premium IPTV</title>
-    
+
     <!-- Premium Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Orbitron:wght@600;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Orbitron:wght@600;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Clappr Video Engine -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
-    
+
     <style>
         :root {
-            --bg-base: #020617;
-            --bg-surface: #0b1329;
-            --accent: #ff2a5f;
-            --worldcup-color: #00ffcc;
-            --worldcup-glow: rgba(0, 255, 204, 0.3);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            /* ===== PREMIUM OBSIDIAN & GOLD PALETTE ===== */
+            --bg-base: #0b0a10;
+            --bg-elev: #17141f;
+            --bg-surface: #1e1a28;
+            --gold: #d8ae6c;
+            --gold-bright: #f3d599;
+            --gold-soft: rgba(216, 174, 108, 0.16);
+            --violet: #8b6cf0;
+            --violet-soft: rgba(139, 108, 240, 0.18);
+            --arena: #00e6a8;
+            --arena-glow: rgba(0, 230, 168, 0.28);
+            --live-red: #ff4d6d;
+            --text-main: #f6f1e7;
+            --text-muted: #948f9f;
+            --border-soft: rgba(216, 174, 108, 0.14);
         }
 
         * {
@@ -33,38 +41,63 @@
 
         body {
             background-color: var(--bg-base);
+            background-image:
+                radial-gradient(circle at 10% 0%, rgba(139, 108, 240, 0.10), transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(216, 174, 108, 0.08), transparent 45%);
+            background-size: 180% 180%;
+            background-position: 0% 0%;
             color: var(--text-main);
-            padding-top: 60px;
+            padding-top: 112px;
+            animation: bgDrift 22s ease-in-out infinite alternate;
+        }
+        @keyframes bgDrift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 40%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            body { animation: none; }
         }
 
-        /* ================= MOBILE OPTIMIZED INTRO LOADER ================= */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-soft); border-radius: 10px; }
+
+        /* ================= INTRO LOADER ================= */
         #intro-loader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: radial-gradient(circle at center, #1a1626 0%, #0b0a10 100%);
             z-index: 9999;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 10px;
             transition: opacity 0.6s ease, visibility 0.6s;
         }
         .intro-title {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 1.8rem; /* মোবাইলের জন্য পারফেক্ট সাইজ */
+            font-size: 1.9rem;
             font-weight: 900;
-            color: #ffffff;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--accent), 0 0 25px var(--accent);
+            letter-spacing: 3px;
             text-align: center;
             padding: 0 15px;
-            animation: pulseText 1.5s infinite alternate;
+            background: linear-gradient(100deg, #b8925a 10%, var(--gold-bright) 35%, #fff6df 50%, var(--gold-bright) 65%, #b8925a 90%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: foilShimmer 2.2s linear infinite;
         }
-        @keyframes pulseText {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            100% { transform: scale(1.02); opacity: 1; }
+        .intro-sub {
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        @keyframes foilShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 250% center; }
         }
 
         /* ================= HEADER ================= */
@@ -72,34 +105,116 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 4%;
-            background: rgba(2, 6, 23, 0.9);
+            padding: 0 4%;
+            height: 58px;
+            background: rgba(11, 10, 16, 0.92);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--border-soft);
         }
         .brand-text {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #ffffff, #ff7ea0, var(--accent));
+            letter-spacing: 1px;
+            background: linear-gradient(100deg, #b8925a 10%, var(--gold-bright) 40%, #fff6df 50%, var(--gold-bright) 60%, #b8925a 90%);
+            background-size: 250% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: foilShimmer 4s linear infinite;
+        }
+        .brand-tag {
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            color: var(--violet);
+            text-transform: uppercase;
+            display: block;
+            margin-top: 1px;
+        }
+        .header-right { display: flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.65rem; }
+        .header-right i { color: var(--live-red); font-size: 0.5rem; animation: liveDotPulse 1.4s ease-in-out infinite; }
+
+        /* ================= CATEGORY NAVIGATION ================= */
+        .cat-nav {
+            position: fixed;
+            top: 58px; left: 0;
+            width: 100%;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 4%;
+            background: rgba(23, 20, 31, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-soft);
+            z-index: 999;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .cat-nav::-webkit-scrollbar { display: none; }
+        .cat-nav::after {
+            content: "";
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold-bright) 50%, var(--gold) 80%, transparent);
+            background-size: 200% auto;
+            animation: lightStrip 5s linear infinite;
+            opacity: 0.6;
+        }
+        @keyframes lightStrip {
+            0% { background-position: 0% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .nav-pill {
+            flex: 0 0 auto;
+            background: transparent;
+            border: 1px solid var(--border-soft);
+            color: var(--text-muted);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            padding: 7px 15px;
+            border-radius: 999px;
+            cursor: pointer;
+            white-space: nowrap;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+        .nav-pill:active { transform: scale(0.95); }
+        @media (hover: hover) {
+            .nav-pill:hover:not(.active) {
+                border-color: var(--gold);
+                color: var(--gold-bright);
+                transform: translateY(-1px);
+            }
+        }
+        .nav-pill.active {
+            background: linear-gradient(120deg, var(--gold), var(--gold-bright));
+            border-color: transparent;
+            color: #1a1408;
+            font-weight: 800;
+            box-shadow: 0 4px 14px rgba(216, 174, 108, 0.28);
+            animation: pillPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes pillPop {
+            0% { transform: scale(0.88); }
+            100% { transform: scale(1); }
         }
 
-        /* ================= PREMIUM VIDEO POPUP PLAYER SYSTEM ================= */
+        /* ================= POPUP PLAYER ================= */
         #popup-player-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(2, 6, 23, 0.85);
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: rgba(8, 7, 12, 0.88);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 2000;
@@ -114,8 +229,8 @@
             background: var(--bg-surface);
             border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(216,174,108,0.06);
             animation: popUpScale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         @keyframes popUpScale {
@@ -127,13 +242,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px;
-            background: rgba(255,255,255,0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(216, 174, 108, 0.04);
+            border-bottom: 1px solid var(--border-soft);
         }
-        .popup-title { font-size: 0.95rem; font-weight: 700; color: #fff; }
+        .popup-title { font-size: 0.95rem; font-weight: 700; color: var(--gold-bright); }
         .popup-close-btn { background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; transition: color 0.2s; }
-        .popup-close-btn:hover { color: var(--accent); }
-        
+        .popup-close-btn:hover { color: var(--live-red); }
+
         .popup-video-container {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -142,74 +257,256 @@
         }
         #player-canvas { width: 100%; height: 100%; }
 
-        /* ================= HIGH GRAPHICS WORLD CUP ZONE ================= */
+        /* ================= HERO STRIP ================= */
         .dashboard-container { padding: 15px 4%; }
-        .worldcup-zone {
-            background: linear-gradient(135deg, #051622 0%, #020a12 100%);
-            border: 1.5px solid var(--worldcup-color);
-            border-radius: 14px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px var(--worldcup-glow);
-        }
-        .wc-headline {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            color: var(--worldcup-color);
-            margin-bottom: 12px;
+        .hero-strip {
             display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 18px 4px 20px;
+        }
+        .hero-eyebrow {
+            font-size: 0.62rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--violet);
+            font-weight: 700;
+        }
+        .hero-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .hero-title span { color: var(--gold); }
+        .hero-stats {
+            display: flex;
+            gap: 18px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .hero-stat { display: flex; flex-direction: column; }
+        .hero-stat b { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--gold-bright); }
+        .hero-stat small { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* ================= UTILITY & SEARCH ================= */
+        .utility-bar { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+        .search-input {
+            width: 100%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-soft);
+            padding: 12px 18px;
+            border-radius: 20px;
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.85rem;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .search-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(216, 174, 108, 0.12);
+        }
+        .search-input::placeholder { color: var(--text-muted); }
+        .filter-row { display: flex; justify-content: flex-end; align-items: center; }
+        .custom-dropdown select {
+            background: var(--bg-surface);
+            color: var(--text-main);
+            border: 1px solid var(--border-soft);
+            padding: 6px 12px;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.75rem;
+        }
+        @media (min-width: 768px) {
+            .utility-bar { flex-direction: row; justify-content: space-between; align-items: center; }
+        }
+
+        /* ================= GENRE SECTIONS ================= */
+        .genre-section { margin-bottom: 30px; }
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(216, 174, 108, 0.08);
+        }
+        .section-headline { font-size: 0.98rem; font-weight: 700; display: flex; align-items: center; gap: 8px; color: var(--text-main); }
+        .section-headline span.bar { width: 3px; height: 14px; background: var(--gold); display: inline-block; border-radius: 2px; }
+        .section-count { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+
+        /* ================= GRID SYSTEM ================= */
+        .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (min-width: 768px) {
+            .media-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
+        }
+
+        .stream-card {
+            background: var(--bg-surface);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(216, 174, 108, 0.07);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: cardReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: var(--reveal-delay, 0s);
+        }
+        @keyframes cardReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .stream-card { animation: none; opacity: 1; transform: none; }
+        }
+        .stream-card:active { transform: scale(0.97); }
+        @media (hover: hover) {
+            .stream-card:hover {
+                border-color: var(--gold);
+                box-shadow: 0 10px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(216,174,108,0.15);
+                transform: translateY(-3px);
+            }
+            .stream-card:hover .card-banner::after { transform: translateX(140%); }
+            .stream-card:hover .card-mono { transform: scale(1.08); box-shadow: 0 0 0 4px rgba(216,174,108,0.12); }
+        }
+
+        /* ---- Copyright-safe card art: monogram badge on a duotone panel per category ---- */
+        .card-banner {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background:
+                repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px),
+                linear-gradient(145deg, #241f30 0%, #14111c 100%);
+        }
+        .card-banner::after {
+            content: "";
+            position: absolute;
+            top: 0; left: -60%;
+            width: 40%; height: 100%;
+            background: linear-gradient(100deg, transparent, rgba(255,255,255,0.09), transparent);
+            transform: translateX(0);
+            transition: transform 0.6s ease;
+            pointer-events: none;
+        }
+        .card-mono {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            border: 1.5px solid currentColor;
+            background: rgba(255,255,255,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-mini-icon {
+            position: absolute;
+            bottom: 7px; right: 9px;
+            font-size: 0.7rem;
+            opacity: 0.4;
+        }
+        .live-indicator {
+            position: absolute;
+            top: 6px; left: 6px;
+            background: rgba(255, 77, 109, 0.18);
+            border: 1px solid var(--live-red);
+            color: var(--live-red);
+            font-size: 0.5rem;
+            font-weight: 700;
+            padding: 1px 5px 1px 12px;
+            border-radius: 10px;
+            text-transform: uppercase;
+        }
+        .live-indicator::before {
+            content: "";
+            position: absolute;
+            left: 4px; top: 50%;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: var(--live-red);
+            transform: translateY(-50%);
+            animation: liveDotPulse 1.4s ease-in-out infinite;
+        }
+        @keyframes liveDotPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.5); }
+            50% { opacity: 0.5; box-shadow: 0 0 0 3px rgba(255, 77, 109, 0); }
+        }
+
+        /* Category badge tones */
+        .tone-bangla { color: var(--violet); background: radial-gradient(circle at 30% 20%, rgba(139,108,240,0.16), transparent 60%), linear-gradient(145deg, #241f30 0%, #14111c 100%); }
+        .tone-news { color: #7fb8d9; background: radial-gradient(circle at 30% 20%, rgba(127,184,217,0.16), transparent 60%), linear-gradient(145deg, #241f30 0%, #14111c 100%); }
+        .tone-sports { color: var(--gold); background: radial-gradient(circle at 30% 20%, rgba(216,174,108,0.18), transparent 60%), linear-gradient(145deg, #241f30 0%, #14111c 100%); }
+        .tone-music { color: #b79bf5; background: radial-gradient(circle at 30% 20%, rgba(183,155,245,0.16), transparent 60%), linear-gradient(145deg, #241f30 0%, #14111c 100%); }
+        .tone-movies { color: #e0708a; background: radial-gradient(circle at 30% 20%, rgba(224,112,138,0.16), transparent 60%), linear-gradient(145deg, #241f30 0%, #14111c 100%); }
+
+        .card-meta { padding: 10px; }
+        .card-headline { font-size: 0.8rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-main); }
+        .card-subtext { color: var(--text-muted); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3px; margin-top: 2px; }
+
+        footer {
+            text-align: center;
+            padding: 22px 0;
+            color: #55506a;
+            font-size: 0.65rem;
+            border-top: 1px solid rgba(216, 174, 108, 0.06);
+            margin-top: 20px;
+        }
+        footer span { color: var(--gold); }
+
+        /* ================= AD SLOTS ================= */
+        .ad-slot {
+            margin: 8px 0 28px;
+            padding: 14px 0;
+            border-top: 1px dashed rgba(216, 174, 108, 0.18);
+            border-bottom: 1px dashed rgba(216, 174, 108, 0.18);
+            display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 8px;
         }
-
-        /* ================= UTILITY & SEARCH ================= */
-        .utility-bar { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
-        .search-input { width: 100%; background: var(--bg-surface); border: 1px solid rgba(255, 255, 255, 0.05); padding: 10px 16px; border-radius: 20px; color: var(--text-main); outline: none; font-size: 0.85rem; }
-        .filter-row { display: flex; justify-content: space-between; align-items: center; }
-        .section-headline { font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-        .section-headline span { width: 3px; height: 14px; background: var(--accent); display: inline-block; }
-        .custom-dropdown select { background: var(--bg-surface); color: var(--text-main); border: 1px solid rgba(255, 255, 255, 0.06); padding: 6px 12px; border-radius: 20px; outline: none; font-size: 0.75rem; }
-
-        /* ================= GRID SYSTEM ================= */
-        .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        @media (min-width: 768px) {
-            .utility-bar { flex-direction: row; justify-content: space-between; align-items: center; }
-            .media-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+        .ad-slot-label {
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
-
-        .stream-card { background: var(--bg-surface); border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.02); transition: transform 0.2s; }
-        .stream-card:active { transform: scale(0.97); }
-
-        .card-banner { width: 100%; aspect-ratio: 16 / 10; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
-        .card-banner i { font-size: 1.6rem; }
-        .live-indicator { position: absolute; top: 6px; left: 6px; background: rgba(239, 68, 68, 0.25); border: 1px solid #ef4444; color: #ef4444; font-size: 0.5rem; font-weight: 700; padding: 1px 5px; border-radius: 10px; text-transform: uppercase; }
-        
-        /* LOGO COLORS */
-        .logo-wc { color: #00ffcc; }
-        .logo-music { color: #ff00ff; }
-        .logo-news { color: #38bdf8; }
-        .logo-sports { color: #facc15; }
-        .logo-movie { color: #f43f5e; }
-        .logo-ent { color: #a855f7; }
-
-        .card-meta { padding: 8px; }
-        .card-headline { font-size: 0.8rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .card-subtext { color: var(--text-muted); font-size: 0.65rem; text-transform: uppercase; }
-
-        footer { text-align: center; padding: 20px 0; color: #475569; font-size: 0.65rem; border-top: 1px solid rgba(255, 255, 255, 0.02); margin-top: 20px; }
+        .ad-slot-inner { width: 100%; display: flex; justify-content: center; overflow: hidden; }
     </style>
 </head>
 <body>
 
-    <!-- OPTIMIZED WELCOME INTRO -->
+    <!-- INTRO -->
     <div id="intro-loader">
         <div class="intro-title">Till Infinity</div>
+        <div class="intro-sub">Premium Live Network</div>
     </div>
 
     <!-- HEADER -->
     <header>
-        <div class="header-left"><span class="brand-text">Till Infinity</span></div>
+        <div class="header-left">
+            <span class="brand-text">Till Infinity</span>
+            <span class="brand-tag">Play</span>
+        </div>
+        <div class="header-right"><i class="fa-solid fa-circle"></i> 33 Channels Live</div>
     </header>
+
+    <!-- CATEGORY NAVIGATION -->
+    <nav class="cat-nav" id="cat-nav">
+        <button class="nav-pill active" onclick="navFilter('all', this)"><i class="fa-solid fa-house"></i>&nbsp; All</button>
+        <button class="nav-pill" onclick="navFilter('bangla', this)">Bangla</button>
+        <button class="nav-pill" onclick="navFilter('news', this)">News</button>
+        <button class="nav-pill" onclick="navFilter('sports', this)">Sports</button>
+        <button class="nav-pill" onclick="navFilter('music', this)">Music &amp; Kids</button>
+        <button class="nav-pill" onclick="navFilter('movies', this)">Movies</button>
+    </nav>
 
     <!-- FLOATING POPUP THEATER OVERLAY -->
     <div id="popup-player-overlay">
@@ -226,21 +523,14 @@
 
     <!-- DASHBOARD -->
     <main class="dashboard-container">
-        
-        <!-- WORLD CUP ZONE (FIXED MIXED SYSTEM) -->
-        <div class="worldcup-zone">
-            <div class="wc-headline"><i class="fa-solid fa-trophy"></i> WORLD CUP SPECIAL</div>
-            <div class="media-grid">
-                <!-- T Sports (Mixed HTTP Protocol / HLS JS Optimized Embed) -->
-                <div class="stream-card" data-genre="sports" data-name="t sport world cup" onclick="bootMultiRouteEngine(['http://103.165.93.31:8095/tsports/tracks-v1a1a2/mono.m3u8', 'http://103.165.93.31:8095/tsports/tracks-v1a1/mono.m3u8'], 'T Sport (WORLD CUP)')">
-                    <div class="card-banner"><div class="live-indicator">LIVE</div><i class="fa-solid fa-circle-play logo-wc"></i></div>
-                    <div class="card-meta"><div class="card-headline">T Sport (WORLD CUP)</div><div class="card-subtext">Auto-Backup Engine</div></div>
-                </div>
-                <!-- Somoy TV (Token Authorized HLS Entry) -->
-                <div class="stream-card" data-genre="sports" data-name="somoy tv world cup" onclick="bootMultiRouteEngine(['http://114.130.57.233:8080/Somoy-TV-3Mb/tracks-v1a1/mono.m3u8?token=SkQuhAXZxgBan1'], 'SOMOY TV (WORLD CUP)')">
-                    <div class="card-banner"><div class="live-indicator">LIVE</div><i class="fa-solid fa-bolt logo-wc"></i></div>
-                    <div class="card-meta"><div class="card-headline">SOMOY TV (WC)</div><div class="card-subtext">Premium Stream</div></div>
-                </div>
+
+        <div class="hero-strip">
+            <span class="hero-eyebrow">Live Streaming Network</span>
+            <h1 class="hero-title">সব চ্যানেল, <span>এক জায়গায়</span></h1>
+            <div class="hero-stats">
+                <div class="hero-stat"><b>33</b><small>Total Channels</small></div>
+                <div class="hero-stat"><b>05</b><small>Categories</small></div>
+                <div class="hero-stat"><b>HD</b><small>Auto Backup Feed</small></div>
             </div>
         </div>
 
@@ -248,9 +538,8 @@
         <div class="utility-bar">
             <input type="text" id="engine-search" class="search-input" placeholder="চ্যানেলের নাম সার্চ করুন..." onkeyup="runEngineFilters()">
             <div class="filter-row">
-                <h2 class="section-headline"><span></span>All Packs</h2>
                 <div class="custom-dropdown">
-                    <select id="grid-filter" onchange="runEngineFilters()">
+                    <select id="grid-filter" onchange="runEngineFilters(); syncNavFromDropdown();">
                         <option value="all">All Categories</option>
                         <option value="bangla">Bangla Pack</option>
                         <option value="news">News Networks</option>
@@ -262,147 +551,217 @@
             </div>
         </div>
 
-        <!-- STREAMS PIPELINE -->
-        <div class="media-grid" id="channels-container">
-
-            <!-- MUSIC & KIDS -->
-            <div class="stream-card" data-genre="music" data-name="7s music" onclick="bootMultiRouteEngine(['https://mumt03.tangotv.in/Dsly5z3H7SMUSIC/index.m3u8'], '7S Music')">
-                <div class="card-banner"><i class="fa-solid fa-music logo-music"></i></div>
-                <div class="card-meta"><div class="card-headline">7S Music</div><div class="card-subtext">Music</div></div>
+        <!-- AD: 300x250 Banner -->
+        <div class="ad-slot">
+            <span class="ad-slot-label">Advertisement</span>
+            <div class="ad-slot-inner">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'ab984da7495df1f3889687e10126ef83',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="https://www.highperformanceformat.com/ab984da7495df1f3889687e10126ef83/invoke.js"></script>
             </div>
-            <div class="stream-card" data-genre="music" data-name="9x jalwa" onclick="bootMultiRouteEngine(['https://mumt03.tangotv.in/Dsly5z3H9XJALWA/index.m3u8'], '9X Jalwa')">
-                <div class="card-banner"><i class="fa-solid fa-radio logo-music"></i></div>
-                <div class="card-meta"><div class="card-headline">9X Jalwa</div><div class="card-subtext">Music</div></div>
-            </div>
-            <div class="stream-card" data-genre="music" data-name="9x jhakaas" onclick="bootMultiRouteEngine(['https://cdn-3.pishow.tv/live/6/master.m3u8'], '9X Jhakaas')">
-                <div class="card-banner"><i class="fa-solid fa-compact-disc logo-music"></i></div>
-                <div class="card-meta"><div class="card-headline">9X Jhakaas</div><div class="card-subtext">Music</div></div>
-            </div>
-            <div class="stream-card" data-genre="music" data-name="9x tashan" onclick="bootMultiRouteEngine(['https://cdn-2.pishow.tv/live/1613/master.m3u8'], '9X Tashan')">
-                <div class="card-banner"><i class="fa-solid fa-guitar logo-music"></i></div>
-                <div class="card-meta"><div class="card-headline">9X Tashan</div><div class="card-subtext">Music</div></div>
-            </div>
-            <div class="stream-card" data-genre="music" data-name="9xm" onclick="bootMultiRouteEngine(['https://epiconvh.akamaized.net/live/9XM/master.m3u8'], '9XM')">
-                <div class="card-banner"><i class="fa-solid fa-sliders logo-music"></i></div>
-                <div class="card-meta"><div class="card-headline">9XM Music</div><div class="card-subtext">Music Pack</div></div>
-            </div>
-            <div class="stream-card" data-genre="music" data-name="motu patlu" onclick="bootMultiRouteEngine(['https://live20.bozztv.com/giatvplayout7/giatv-209622/tracks-v1a1/mono.ts.m3u8'], 'Motu Patlu')">
-                <div class="card-banner"><i class="fa-solid fa-child logo-music"></i></div>
-                <div class="card-meta"><div class="card-headline">Motu Patlu</div><div class="card-subtext">Kids Only</div></div>
-            </div>
-            <div class="stream-card" data-genre="music" data-name="gopal bhar" onclick="bootMultiRouteEngine(['https://live20.bozztv.com/giatvplayout7/giatv-209611/tracks-v1a1/mono.ts.m3u8'], 'Gopal Bhar')">
-                <div class="card-banner"><i class="fa-solid fa-face-smile logo-music"></i></div>
-                <div class="card-meta"><div class="card-headline">GOPAL BHAR</div><div class="card-subtext">Kids Only</div></div>
-            </div>
-
-            <!-- NEWS NETWORKS -->
-            <div class="stream-card" data-genre="news" data-name="4tv news" onclick="bootMultiRouteEngine(['https://cdn-4.pishow.tv/live/1007/master.m3u8'], '4TV News')">
-                <div class="card-banner"><i class="fa-solid fa-newspaper logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">4TV News</div><div class="card-subtext">News</div></div>
-            </div>
-            <div class="stream-card" data-genre="news" data-name="6 tv telugu" onclick="bootMultiRouteEngine(['https://cdn-1.pishow.tv/live/232/master.m3u8'], '6 TV Telugu')">
-                <div class="card-banner"><i class="fa-solid fa-tv logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">6 TV Telugu</div><div class="card-subtext">News</div></div>
-            </div>
-            <div class="stream-card" data-genre="news" data-name="10 tv" onclick="bootMultiRouteEngine(['https://cdn-1.pishow.tv/live/391/master.m3u8'], '10 TV')">
-                <div class="card-banner"><i class="fa-solid fa-tv logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">10 TV</div><div class="card-subtext">News</div></div>
-            </div>
-            <div class="stream-card" data-genre="news" data-name="22scope news" onclick="bootMultiRouteEngine(['https://thelegitpro.in/HDlive/22scope/index.fmp4.m3u8'], '22Scope News')">
-                <div class="card-banner"><i class="fa-solid fa-square-rss logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">22Scope News</div><div class="card-subtext">News</div></div>
-            </div>
-            <div class="stream-card" data-genre="news" data-name="24 news" onclick="bootMultiRouteEngine(['https://mumt07.tangotv.in/zHjX9OFlTWENTYFOURNEWS/index.m3u8'], '24 News')">
-                <div class="card-banner"><i class="fa-solid fa-clock logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">24 News Global</div><div class="card-subtext">News</div></div>
-            </div>
-            <div class="stream-card" data-genre="news" data-name="99tv" onclick="bootMultiRouteEngine(['https://cdn-1.pishow.tv/live/1211/master.m3u8'], '99TV')">
-                <div class="card-banner"><i class="fa-solid fa-broadcast-tower logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">99TV</div><div class="card-subtext">News</div></div>
-            </div>
-            <div class="stream-card" data-genre="news" data-name="iran international en" onclick="bootMultiRouteEngine(['https://dev-live.livetvstream.co.uk/LS-63503-4/chunklist_b1196000.m3u8'], 'Iran International')">
-                <div class="card-banner"><i class="fa-solid fa-globe logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">Iran Intl (EN)</div><div class="card-subtext">Global News</div></div>
-            </div>
-
-            <!-- BANGLA DESH PACK -->
-            <div class="stream-card" data-genre="bangla" data-name="aakaash aath" onclick="bootMultiRouteEngine(['https://mumt03.tangotv.in/Dsly5z3HAAKASHAATH/index.m3u8'], 'Aakaash Aath')">
-                <div class="card-banner"><i class="fa-solid fa-cloud-sun logo-ent"></i></div>
-                <div class="card-meta"><div class="card-headline">Aakaash Aath</div><div class="card-subtext">Bangla Ent</div></div>
-            </div>
-            <div class="stream-card" data-genre="bangla" data-name="abp ananda" onclick="bootMultiRouteEngine(['https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/ananda-livetv/master.m3u8'], 'ABP Ananda')">
-                <div class="card-banner"><i class="fa-solid fa-map logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">ABP Ananda</div><div class="card-subtext">Bangla News</div></div>
-            </div>
-            <div class="stream-card" data-genre="bangla" data-name="independent tv" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1704/output/1704.m3u8'], 'Independent TV')">
-                <div class="card-banner"><i class="fa-solid fa-bullseye logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">Independent TV</div><div class="card-subtext">BD News</div></div>
-            </div>
-            <div class="stream-card" data-genre="bangla" data-name="maasranga tv" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1722/output/index.m3u8'], 'Maasranga TV')">
-                <div class="card-banner"><i class="fa-solid fa-fish logo-ent"></i></div>
-                <div class="card-meta"><div class="card-headline">Maasranga TV</div><div class="card-subtext">BD Pack</div></div>
-            </div>
-            <div class="stream-card" data-genre="bangla" data-name="news 21 bangla tv" onclick="bootMultiRouteEngine(['http://103.190.133.68:1935/news21live/live/playlist.m3u8'], 'News 21 Bangla')">
-                <div class="card-banner"><i class="fa-solid fa-display logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">News 21 Bangla</div><div class="card-subtext">BD News</div></div>
-            </div>
-            <div class="stream-card" data-genre="bangla" data-name="news 24 bangladesh" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1708/output/1708.m3u8'], 'News 24 BD')">
-                <div class="card-banner"><i class="fa-solid fa-square-phone-flip logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">News 24 BD</div><div class="card-subtext">BD News</div></div>
-            </div>
-            <div class="stream-card" data-genre="bangla" data-name="ntv bangladesh" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1716/output/index.m3u8'], 'NTV Bangladesh')">
-                <div class="card-banner"><i class="fa-solid fa-circle-dot logo-ent"></i></div>
-                <div class="card-meta"><div class="card-headline">NTV Bangladesh</div><div class="card-subtext">BD Pack</div></div>
-            </div>
-            <div class="stream-card" data-genre="bangla" data-name="star news bangladesh" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1710/output/index.m3u8'], 'Star News BD')">
-                <div class="card-banner"><i class="fa-solid fa-star logo-news"></i></div>
-                <div class="card-meta"><div class="card-headline">Star News BD</div><div class="card-subtext">BD News</div></div>
-            </div>
-            <div class="stream-card" data-genre="bangla" data-name="rongeen tv" onclick="bootMultiRouteEngine(['https://server.thelegitpro.in/rongeentv/rongeentv/tracks-v1a1/mono.m3u8'], 'Rongeen TV')">
-                <div class="card-banner"><i class="fa-solid fa-palette logo-ent"></i></div>
-                <div class="card-meta"><div class="card-headline">Rongeen TV</div><div class="card-subtext">Bangla Ent</div></div>
-            </div>
-
-            <!-- SPORTS ZONE -->
-            <div class="stream-card" data-genre="sports" data-name="sky sports" onclick="bootMultiRouteEngine(['https://atc.hopto.org/sly-sprts-cricket-hd-sport/playlist.m3u8'], 'Sky Sports')">
-                <div class="card-banner"><i class="fa-solid fa-cloud-bolt logo-sports"></i></div>
-                <div class="card-meta"><div class="card-headline">Sky Sports Cricket</div><div class="card-subtext">Sports</div></div>
-            </div>
-            <div class="stream-card" data-genre="sports" data-name="30a golf kingdom" onclick="bootMultiRouteEngine(['https://30a-tv.com/feeds/vidaa/golf.m3u8'], '30A Golf')">
-                <div class="card-banner"><i class="fa-solid fa-flag-hole logo-sports"></i></div>
-                <div class="card-meta"><div class="card-headline">30A Golf Kingdom</div><div class="card-subtext">Sports</div></div>
-            </div>
-            <div class="stream-card" data-genre="sports" data-name="as3 sport tv" onclick="bootMultiRouteEngine(['https://streamtv.as3sport.online:3394/hybrid/play.m3u8'], 'AS3 Sport')">
-                <div class="card-banner"><i class="fa-solid fa-circle-nodes logo-sports"></i></div>
-                <div class="card-meta"><div class="card-headline">AS3 Sport TV</div><div class="card-subtext">Sports Zone</div></div>
-            </div>
-            <div class="stream-card" data-genre="sports" data-name="mtrspt1" onclick="bootMultiRouteEngine(['https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg02873-kravemedia-mtrspt1-distrotv/playlist.m3u8'], 'MTRSPT1')">
-                <div class="card-banner"><i class="fa-solid fa-motorcycle logo-sports"></i></div>
-                <div class="card-meta"><div class="card-headline">MTRSPT1 Racing</div><div class="card-subtext">Racing</div></div>
-            </div>
-
-            <!-- MOVIES & EXTRA -->
-            <div class="stream-card" data-genre="movies" data-name="b4u movies" onclick="bootMultiRouteEngine(['https://cdn-2.pishow.tv/live/419/master.m3u8'], 'B4U Movies')">
-                <div class="card-banner"><i class="fa-solid fa-film logo-movie"></i></div>
-                <div class="card-meta"><div class="card-headline">B4U Movies</div><div class="card-subtext">Movies</div></div>
-            </div>
-            <div class="stream-card" data-genre="movies" data-name="food food" onclick="bootMultiRouteEngine(['http://103.175.73.12:8080/live/143/143_0.m3u8'], 'Food Food')">
-                <div class="card-banner"><i class="fa-solid fa-utensils logo-movie"></i></div>
-                <div class="card-meta"><div class="card-headline">FOOD FOOD</div><div class="card-subtext">Lifestyle</div></div>
-            </div>
-            <div class="stream-card" data-genre="movies" data-name="channel1 4k" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8'], 'Channel1 4K')">
-                <div class="card-banner"><i class="fa-solid fa-clapperboard logo-movie"></i></div>
-                <div class="card-meta"><div class="card-headline">CHANNEL1 4K</div><div class="card-subtext">4K Feed</div></div>
-            </div>
-            <div class="stream-card" data-genre="movies" data-name="live quran tv" onclick="bootMultiRouteEngine(['https://live.kwikmotion.com/sharjahtvquranlive/shqurantv.smil/playlist.m3u8'], 'Live Quran TV')">
-                <div class="card-banner"><i class="fa-solid fa-book-open logo-wc"></i></div>
-                <div class="card-meta"><div class="card-headline">Live Quran TV</div><div class="card-subtext">Islamic</div></div>
-            </div>
-
         </div>
+
+        <!-- ===================== BANGLA PACK ===================== -->
+        <section class="genre-section" data-genre-section="bangla">
+            <div class="section-head">
+                <h2 class="section-headline"><span class="bar"></span>Bangla Pack</h2>
+                <span class="section-count">9 channels</span>
+            </div>
+            <div class="media-grid">
+                <div class="stream-card" data-genre="bangla" data-name="aakaash aath" onclick="bootMultiRouteEngine(['https://mumt03.tangotv.in/Dsly5z3HAAKASHAATH/index.m3u8'], 'Aakaash Aath')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">AA</div><i class="fa-solid fa-cloud-sun card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Aakaash Aath</div><div class="card-subtext">Bangla Ent</div></div>
+                </div>
+                <div class="stream-card" data-genre="bangla" data-name="abp ananda" onclick="bootMultiRouteEngine(['https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/ananda-livetv/master.m3u8'], 'ABP Ananda')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">AB</div><i class="fa-solid fa-map card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">ABP Ananda</div><div class="card-subtext">Bangla News</div></div>
+                </div>
+                <div class="stream-card" data-genre="bangla" data-name="independent tv" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1704/output/1704.m3u8'], 'Independent TV')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">IT</div><i class="fa-solid fa-bullseye card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Independent TV</div><div class="card-subtext">BD News</div></div>
+                </div>
+                <div class="stream-card" data-genre="bangla" data-name="maasranga tv" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1722/output/index.m3u8'], 'Maasranga TV')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">MT</div><i class="fa-solid fa-fish card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Maasranga TV</div><div class="card-subtext">BD Pack</div></div>
+                </div>
+                <div class="stream-card" data-genre="bangla" data-name="news 21 bangla tv" onclick="bootMultiRouteEngine(['http://103.190.133.68:1935/news21live/live/playlist.m3u8'], 'News 21 Bangla')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">21</div><i class="fa-solid fa-display card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">News 21 Bangla</div><div class="card-subtext">BD News</div></div>
+                </div>
+                <div class="stream-card" data-genre="bangla" data-name="news 24 bangladesh" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1708/output/1708.m3u8'], 'News 24 BD')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">24</div><i class="fa-solid fa-square-phone-flip card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">News 24 BD</div><div class="card-subtext">BD News</div></div>
+                </div>
+                <div class="stream-card" data-genre="bangla" data-name="ntv bangladesh" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1716/output/index.m3u8'], 'NTV Bangladesh')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">NT</div><i class="fa-solid fa-circle-dot card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">NTV Bangladesh</div><div class="card-subtext">BD Pack</div></div>
+                </div>
+                <div class="stream-card" data-genre="bangla" data-name="star news bangladesh" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1710/output/index.m3u8'], 'Star News BD')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">SN</div><i class="fa-solid fa-star card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Star News BD</div><div class="card-subtext">BD News</div></div>
+                </div>
+                <div class="stream-card" data-genre="bangla" data-name="rongeen tv" onclick="bootMultiRouteEngine(['https://server.thelegitpro.in/rongeentv/rongeentv/tracks-v1a1/mono.m3u8'], 'Rongeen TV')">
+                    <div class="card-banner tone-bangla"><div class="live-indicator">LIVE</div><div class="card-mono">RT</div><i class="fa-solid fa-palette card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Rongeen TV</div><div class="card-subtext">Bangla Ent</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== NEWS NETWORKS ===================== -->
+        <section class="genre-section" data-genre-section="news">
+            <div class="section-head">
+                <h2 class="section-headline"><span class="bar"></span>News Networks</h2>
+                <span class="section-count">7 channels</span>
+            </div>
+            <div class="media-grid">
+                <div class="stream-card" data-genre="news" data-name="4tv news" onclick="bootMultiRouteEngine(['https://cdn-4.pishow.tv/live/1007/master.m3u8'], '4TV News')">
+                    <div class="card-banner tone-news"><div class="live-indicator">LIVE</div><div class="card-mono">4T</div><i class="fa-solid fa-newspaper card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">4TV News</div><div class="card-subtext">News</div></div>
+                </div>
+                <div class="stream-card" data-genre="news" data-name="6 tv telugu" onclick="bootMultiRouteEngine(['https://cdn-1.pishow.tv/live/232/master.m3u8'], '6 TV Telugu')">
+                    <div class="card-banner tone-news"><div class="live-indicator">LIVE</div><div class="card-mono">6T</div><i class="fa-solid fa-tv card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">6 TV Telugu</div><div class="card-subtext">News</div></div>
+                </div>
+                <div class="stream-card" data-genre="news" data-name="10 tv" onclick="bootMultiRouteEngine(['https://cdn-1.pishow.tv/live/391/master.m3u8'], '10 TV')">
+                    <div class="card-banner tone-news"><div class="live-indicator">LIVE</div><div class="card-mono">10</div><i class="fa-solid fa-tv card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">10 TV</div><div class="card-subtext">News</div></div>
+                </div>
+                <div class="stream-card" data-genre="news" data-name="22scope news" onclick="bootMultiRouteEngine(['https://thelegitpro.in/HDlive/22scope/index.fmp4.m3u8'], '22Scope News')">
+                    <div class="card-banner tone-news"><div class="live-indicator">LIVE</div><div class="card-mono">22</div><i class="fa-solid fa-square-rss card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">22Scope News</div><div class="card-subtext">News</div></div>
+                </div>
+                <div class="stream-card" data-genre="news" data-name="24 news" onclick="bootMultiRouteEngine(['https://mumt07.tangotv.in/zHjX9OFlTWENTYFOURNEWS/index.m3u8'], '24 News')">
+                    <div class="card-banner tone-news"><div class="live-indicator">LIVE</div><div class="card-mono">24</div><i class="fa-solid fa-clock card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">24 News Global</div><div class="card-subtext">News</div></div>
+                </div>
+                <div class="stream-card" data-genre="news" data-name="99tv" onclick="bootMultiRouteEngine(['https://cdn-1.pishow.tv/live/1211/master.m3u8'], '99TV')">
+                    <div class="card-banner tone-news"><div class="live-indicator">LIVE</div><div class="card-mono">99</div><i class="fa-solid fa-broadcast-tower card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">99TV</div><div class="card-subtext">News</div></div>
+                </div>
+                <div class="stream-card" data-genre="news" data-name="iran international en" onclick="bootMultiRouteEngine(['https://dev-live.livetvstream.co.uk/LS-63503-4/chunklist_b1196000.m3u8'], 'Iran International')">
+                    <div class="card-banner tone-news"><div class="live-indicator">LIVE</div><div class="card-mono">II</div><i class="fa-solid fa-globe card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Iran Intl (EN)</div><div class="card-subtext">Global News</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SPORTS ZONE ===================== -->
+        <section class="genre-section" data-genre-section="sports">
+            <div class="section-head">
+                <h2 class="section-headline"><span class="bar"></span>Sports Zone</h2>
+                <span class="section-count">6 channels</span>
+            </div>
+            <div class="media-grid">
+                <div class="stream-card" data-genre="sports" data-name="t sport world cup" onclick="bootMultiRouteEngine(['http://103.165.93.31:8095/tsports/tracks-v1a1a2/mono.m3u8', 'http://103.165.93.31:8095/tsports/tracks-v1a1/mono.m3u8'], 'T Sport (WORLD CUP)')">
+                    <div class="card-banner tone-sports"><div class="live-indicator">LIVE</div><div class="card-mono">TS</div><i class="fa-solid fa-circle-play card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">T Sport (WORLD CUP)</div><div class="card-subtext">Auto-Backup Engine</div></div>
+                </div>
+                <div class="stream-card" data-genre="sports" data-name="somoy tv world cup" onclick="bootMultiRouteEngine(['http://114.130.57.233:8080/Somoy-TV-3Mb/tracks-v1a1/mono.m3u8?token=SkQuhAXZxgBan1'], 'SOMOY TV (WORLD CUP)')">
+                    <div class="card-banner tone-sports"><div class="live-indicator">LIVE</div><div class="card-mono">SO</div><i class="fa-solid fa-bolt card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">SOMOY TV (WC)</div><div class="card-subtext">Premium Stream</div></div>
+                </div>
+                <div class="stream-card" data-genre="sports" data-name="sky sports" onclick="bootMultiRouteEngine(['https://atc.hopto.org/sly-sprts-cricket-hd-sport/playlist.m3u8'], 'Sky Sports')">
+                    <div class="card-banner tone-sports"><div class="live-indicator">LIVE</div><div class="card-mono">SS</div><i class="fa-solid fa-cloud-bolt card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Sky Sports Cricket</div><div class="card-subtext">Sports</div></div>
+                </div>
+                <div class="stream-card" data-genre="sports" data-name="30a golf kingdom" onclick="bootMultiRouteEngine(['https://30a-tv.com/feeds/vidaa/golf.m3u8'], '30A Golf')">
+                    <div class="card-banner tone-sports"><div class="live-indicator">LIVE</div><div class="card-mono">30</div><i class="fa-solid fa-flag-hole card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">30A Golf Kingdom</div><div class="card-subtext">Sports</div></div>
+                </div>
+                <div class="stream-card" data-genre="sports" data-name="as3 sport tv" onclick="bootMultiRouteEngine(['https://streamtv.as3sport.online:3394/hybrid/play.m3u8'], 'AS3 Sport')">
+                    <div class="card-banner tone-sports"><div class="live-indicator">LIVE</div><div class="card-mono">AS</div><i class="fa-solid fa-circle-nodes card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">AS3 Sport TV</div><div class="card-subtext">Sports Zone</div></div>
+                </div>
+                <div class="stream-card" data-genre="sports" data-name="mtrspt1" onclick="bootMultiRouteEngine(['https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg02873-kravemedia-mtrspt1-distrotv/playlist.m3u8'], 'MTRSPT1')">
+                    <div class="card-banner tone-sports"><div class="live-indicator">LIVE</div><div class="card-mono">M1</div><i class="fa-solid fa-motorcycle card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">MTRSPT1 Racing</div><div class="card-subtext">Racing</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AD: Native Banner -->
+        <div class="ad-slot">
+            <span class="ad-slot-label">Advertisement</span>
+            <div class="ad-slot-inner">
+                <div id="container-f68431f0c2917e5e6bd66cafa309e8c7" style="width:100%;"></div>
+                <script async="async" data-cfasync="false" src="https://pl30789516.effectivecpmnetwork.com/f68431f0c2917e5e6bd66cafa309e8c7/invoke.js"></script>
+            </div>
+        </div>
+
+        <!-- ===================== MUSIC & KIDS ===================== -->
+        <section class="genre-section" data-genre-section="music">
+            <div class="section-head">
+                <h2 class="section-headline"><span class="bar"></span>Music &amp; Kids</h2>
+                <span class="section-count">7 channels</span>
+            </div>
+            <div class="media-grid">
+                <div class="stream-card" data-genre="music" data-name="7s music" onclick="bootMultiRouteEngine(['https://mumt03.tangotv.in/Dsly5z3H7SMUSIC/index.m3u8'], '7S Music')">
+                    <div class="card-banner tone-music"><div class="live-indicator">LIVE</div><div class="card-mono">7S</div><i class="fa-solid fa-music card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">7S Music</div><div class="card-subtext">Music</div></div>
+                </div>
+                <div class="stream-card" data-genre="music" data-name="9x jalwa" onclick="bootMultiRouteEngine(['https://mumt03.tangotv.in/Dsly5z3H9XJALWA/index.m3u8'], '9X Jalwa')">
+                    <div class="card-banner tone-music"><div class="live-indicator">LIVE</div><div class="card-mono">9X</div><i class="fa-solid fa-radio card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">9X Jalwa</div><div class="card-subtext">Music</div></div>
+                </div>
+                <div class="stream-card" data-genre="music" data-name="9x jhakaas" onclick="bootMultiRouteEngine(['https://cdn-3.pishow.tv/live/6/master.m3u8'], '9X Jhakaas')">
+                    <div class="card-banner tone-music"><div class="live-indicator">LIVE</div><div class="card-mono">9X</div><i class="fa-solid fa-compact-disc card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">9X Jhakaas</div><div class="card-subtext">Music</div></div>
+                </div>
+                <div class="stream-card" data-genre="music" data-name="9x tashan" onclick="bootMultiRouteEngine(['https://cdn-2.pishow.tv/live/1613/master.m3u8'], '9X Tashan')">
+                    <div class="card-banner tone-music"><div class="live-indicator">LIVE</div><div class="card-mono">9X</div><i class="fa-solid fa-guitar card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">9X Tashan</div><div class="card-subtext">Music</div></div>
+                </div>
+                <div class="stream-card" data-genre="music" data-name="9xm" onclick="bootMultiRouteEngine(['https://epiconvh.akamaized.net/live/9XM/master.m3u8'], '9XM')">
+                    <div class="card-banner tone-music"><div class="live-indicator">LIVE</div><div class="card-mono">9M</div><i class="fa-solid fa-sliders card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">9XM Music</div><div class="card-subtext">Music Pack</div></div>
+                </div>
+                <div class="stream-card" data-genre="music" data-name="motu patlu" onclick="bootMultiRouteEngine(['https://live20.bozztv.com/giatvplayout7/giatv-209622/tracks-v1a1/mono.ts.m3u8'], 'Motu Patlu')">
+                    <div class="card-banner tone-music"><div class="live-indicator">LIVE</div><div class="card-mono">MP</div><i class="fa-solid fa-child card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Motu Patlu</div><div class="card-subtext">Kids Only</div></div>
+                </div>
+                <div class="stream-card" data-genre="music" data-name="gopal bhar" onclick="bootMultiRouteEngine(['https://live20.bozztv.com/giatvplayout7/giatv-209611/tracks-v1a1/mono.ts.m3u8'], 'Gopal Bhar')">
+                    <div class="card-banner tone-music"><div class="live-indicator">LIVE</div><div class="card-mono">GB</div><i class="fa-solid fa-face-smile card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">GOPAL BHAR</div><div class="card-subtext">Kids Only</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== MOVIES & MORE ===================== -->
+        <section class="genre-section" data-genre-section="movies">
+            <div class="section-head">
+                <h2 class="section-headline"><span class="bar"></span>Movies &amp; More</h2>
+                <span class="section-count">4 channels</span>
+            </div>
+            <div class="media-grid">
+                <div class="stream-card" data-genre="movies" data-name="b4u movies" onclick="bootMultiRouteEngine(['https://cdn-2.pishow.tv/live/419/master.m3u8'], 'B4U Movies')">
+                    <div class="card-banner tone-movies"><div class="live-indicator">LIVE</div><div class="card-mono">B4</div><i class="fa-solid fa-film card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">B4U Movies</div><div class="card-subtext">Movies</div></div>
+                </div>
+                <div class="stream-card" data-genre="movies" data-name="food food" onclick="bootMultiRouteEngine(['http://103.175.73.12:8080/live/143/143_0.m3u8'], 'Food Food')">
+                    <div class="card-banner tone-movies"><div class="live-indicator">LIVE</div><div class="card-mono">FF</div><i class="fa-solid fa-utensils card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">FOOD FOOD</div><div class="card-subtext">Lifestyle</div></div>
+                </div>
+                <div class="stream-card" data-genre="movies" data-name="channel1 4k" onclick="bootMultiRouteEngine(['https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8'], 'Channel1 4K')">
+                    <div class="card-banner tone-movies"><div class="live-indicator">LIVE</div><div class="card-mono">C1</div><i class="fa-solid fa-clapperboard card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">CHANNEL1 4K</div><div class="card-subtext">4K Feed</div></div>
+                </div>
+                <div class="stream-card" data-genre="movies" data-name="live quran tv" onclick="bootMultiRouteEngine(['https://live.kwikmotion.com/sharjahtvquranlive/shqurantv.smil/playlist.m3u8'], 'Live Quran TV')">
+                    <div class="card-banner tone-movies"><div class="live-indicator">LIVE</div><div class="card-mono">LQ</div><i class="fa-solid fa-book-open card-mini-icon"></i></div>
+                    <div class="card-meta"><div class="card-headline">Live Quran TV</div><div class="card-subtext">Islamic</div></div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer>&copy; 2026 Till Infinity Network. Engine Core Ultra Stability.</footer>
+    <footer>&copy; 2026 <span>Till Infinity</span> Network. Engine Core Ultra Stability.</footer>
 
     <script>
         var clapprCore = null;
@@ -414,6 +773,16 @@
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
             }, 1200);
+
+            // Stagger the premium card entrance, section by section
+            var sections = document.querySelectorAll('.genre-section');
+            var counter = 0;
+            sections.forEach(function (sec) {
+                sec.querySelectorAll('.stream-card').forEach(function (card) {
+                    card.style.setProperty('--reveal-delay', (1.2 + Math.min(counter, 26) * 0.03) + 's');
+                    counter++;
+                });
+            });
         });
 
         function runEngineFilters() {
@@ -424,15 +793,48 @@
             for (var i = 0; i < cards.length; i++) {
                 var cardGenre = cards[i].getAttribute('data-genre');
                 var cardName = cards[i].getAttribute('data-name');
-                
+
                 var matchesGenre = (genreVal === 'all' || cardGenre === genreVal);
                 var matchesSearch = (cardName.includes(searchVal));
 
                 cards[i].style.display = (matchesGenre && matchesSearch) ? 'block' : 'none';
             }
+
+            // Hide a whole section (and its heading) if it has no visible cards left
+            var sections = document.querySelectorAll('.genre-section');
+            sections.forEach(function (sec) {
+                var visible = Array.prototype.some.call(sec.querySelectorAll('.stream-card'), function (c) {
+                    return c.style.display !== 'none';
+                });
+                sec.style.display = visible ? '' : 'none';
+            });
         }
 
-        // MOUNT INTERNAL REVENUE CONFIG (Optimized for HTTP and Tokens)
+        // ===== CATEGORY NAV (top pills) =====
+        function navFilter(genre, btn) {
+            document.getElementById('grid-filter').value = genre;
+            runEngineFilters();
+            document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+
+            var target = genre === 'all'
+                ? document.querySelector('.hero-strip')
+                : document.querySelector('.genre-section[data-genre-section="' + genre + '"]');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Keep the nav pills in sync if the person uses the dropdown instead
+        function syncNavFromDropdown() {
+            var val = document.getElementById('grid-filter').value;
+            document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+            var pills = document.querySelectorAll('.nav-pill');
+            var labels = ['all', 'bangla', 'news', 'sports', 'music', 'movies'];
+            for (var i = 0; i < pills.length; i++) {
+                if (labels[i] === val) { pills[i].classList.add('active'); break; }
+            }
+        }
+
+        // MOUNT CORE PLAYER
         function mountCorePlayer(url) {
             if (clapprCore && typeof clapprCore.destroy === 'function') { clapprCore.destroy(); }
 
@@ -460,7 +862,7 @@
         function bootMultiRouteEngine(urlArray, channelTitle) {
             document.getElementById('popup-stream-title').innerText = channelTitle + " - Live";
             document.getElementById('popup-player-overlay').style.display = 'flex';
-            
+
             var routeIndex = 0;
 
             function attemptRouteSequence() {
@@ -472,7 +874,6 @@
 
                 mountCorePlayer(urlArray[routeIndex]);
 
-                // Auto Trigger Failover if stream breaks down or token expires
                 clapprCore.on(Clappr.Events.PLAYER_ERROR, function() {
                     console.log("Stream Route failed, hot-swapping path index: " + (routeIndex + 1));
                     routeIndex++;
@@ -487,6 +888,11 @@
             if (clapprCore && typeof clapprCore.destroy === 'function') { clapprCore.destroy(); clapprCore = null; }
             document.getElementById('popup-player-overlay').style.display = 'none';
         }
-    </script>
+    </script>    <!-- ADSTERRA: Popunder (site-wide) -->
+    <script type="text/javascript" src="https://pl30789515.effectivecpmnetwork.com/34/de/36/34de36d79fafc589d2f6649e6b28ca6a.js"></script>
+
+    <!-- ADSTERRA: Social Bar (site-wide) -->
+    <script type="text/javascript" src="https://pl30789518.effectivecpmnetwork.com/1d/e8/f4/1de8f410e94cbe1e3569f4c838817537.js"></script>
+
 </body>
 </html>
