@@ -27,6 +27,7 @@ jobs:
         with:
           node-version: 20
 
+      # No npm cache here because this repository has no package-lock.json.
       - name: Install dependencies
         run: npm install
 
